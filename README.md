@@ -18,13 +18,13 @@
 OS: macOS Ventura 13.0.1  
 NPM: v9.2.0  
 Node: v19.0.1  
-Vue: v3.2.45
+Vue: v3.2.45 (vue/cli v5.0.8)
 
 ---
 
 # Installation
 
 ```shell
-npm install npm node vue@3.2.45
+npm install -g vue@3.2.45 @vue/cli@5.0.8
 ```
 
