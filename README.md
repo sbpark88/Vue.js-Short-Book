@@ -6,6 +6,11 @@
 - Author: 고승원
 - Publisher: 비제이퍼블릭
 
+### Sample Source Code
+
+- [Vue-Project](https://github.com/seungwongo/vue-project)
+- [Mini-Project-Shop](https://github.com/seungwongo/mini-project-shop)
+
 ---
 
 # System Configurations
