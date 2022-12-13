@@ -3,7 +3,8 @@
     <router-link to="/">Home</router-link> |
     <router-link to="/about">About</router-link> |
     <router-link to="/databinding">DataBinding</router-link> |
-    <router-link to="/vueFor">VueFor</router-link>
+    <router-link to="/vueFor">VueFor</router-link> |
+    <router-link to="/vueIf">VueIf</router-link>
   </nav>
   <router-view/>
 </template>

@@ -25,6 +25,12 @@ const routes = [
     path: '/vueFor',
     name: 'vueFor',
     component: () => import(/* webpackChunkName: "vueFor" */ '../views/VueFor.vue')
+  },
+  {
+    path: '/vueif',
+    name: 'vueIf',
+    component: () => import(/* webpackChunkName: "vueFor" */ '../views/VueIf.vue')
+
   }
 ]
 
