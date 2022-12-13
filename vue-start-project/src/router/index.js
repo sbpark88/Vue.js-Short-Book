@@ -35,6 +35,11 @@ const routes = [
     path: '/vueshow',
     name: 'vueShow',
     component: () => import(/* webpackChunkName: "vueSHow" */ '../views/VueShow.vue')
+  },
+  {
+    path: '/vueOnEvents',
+    name: 'vueOnEvent',
+    component: () => import(/* webpackChunkName: "vueOnEvents" */ '../views/VueOnEvents.vue')
   }
 ]
 
