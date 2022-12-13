@@ -30,7 +30,11 @@ const routes = [
     path: '/vueif',
     name: 'vueIf',
     component: () => import(/* webpackChunkName: "vueFor" */ '../views/VueIf.vue')
-
+  },
+  {
+    path: '/vueshow',
+    name: 'vueShow',
+    component: () => import(/* webpackChunkName: "vueSHow" */ '../views/VueShow.vue')
   }
 ]
 
