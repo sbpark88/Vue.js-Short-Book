@@ -15,6 +15,16 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
     // component: () => import(/* webpackPrefetch: true */ '../views/AboutView.vue')
+  },
+  {
+    path: '/databinding',
+    name: 'dataBinding',
+    component: () => import(/* webpackChunkName: "dataBinding" */ '../views/DataBinding.vue')
+  },
+  {
+    path: '/vueFor',
+    name: 'vueFor',
+    component: () => import(/* webpackChunkName: "vueFor" */ '../views/VueFor.vue')
   }
 ]
 
