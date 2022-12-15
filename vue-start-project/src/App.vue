@@ -6,7 +6,8 @@
     <router-link to="/vueFor">VueFor</router-link> |
     <router-link to="/vueIf">VueIf</router-link> |
     <router-link to="/vueShow">VueShow</router-link> |
-    <router-link to="/vueOnEvents">VueOnEvents</router-link>
+    <router-link to="/vueOnEvents">VueOnEvents</router-link> |
+    <router-link to="/vueComputed">VueComputed</router-link>
   </nav>
   <router-view/>
 </template>
