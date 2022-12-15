@@ -4,6 +4,17 @@
 
   <h4>Computed</h4>
   <div>{{ fullName }}</div>
+
+  <hr>
+
+  <h4>firstName</h4>
+  <input type="text" v-model="firstName">
+
+  <h4>lastName</h4>
+  <input type="text" v-model="lastName">
+
+  <h4>fullName</h4>
+  <input type="text" v-model="fullName">
 </template>
 
 <script>
@@ -35,8 +46,14 @@ export default {
   },
   watch: {
     firstName() {
-
-    }
+      const oldValue = this.firstName
+      console.log(oldValue)
+      this.firstName = `${oldValue.substring(0, 1).toUpperCase()}${oldValue.substring(1)}`
+    },
+    lastName() {
+      const oldValue = this.lastName
+      this.lastName = `${oldValue.substring(0, 1).toUpperCase()}${oldValue.substring(1)}`
+    },
   }
 }
 </script>
