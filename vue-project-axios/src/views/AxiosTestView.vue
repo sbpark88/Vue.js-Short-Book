@@ -20,16 +20,12 @@
 </template>
 
 <script>
+import product from "@/dto/product";
 export default {
   name: "AxiosTestView",
   data() {
     return {
-      productList: Array["product"],
-      product: {
-        productName: "",
-        price: 0,
-        category: "",
-      },
+      productList: Array[product],
     };
   },
   created() {
