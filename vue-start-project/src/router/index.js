@@ -40,7 +40,12 @@ const routes = [
     path: '/vueOnEvents',
     name: 'vueOnEvent',
     component: () => import(/* webpackChunkName: "vueOnEvents" */ '../views/VueOnEvents.vue')
-  }
+  },
+  {
+    path: '/vueComputed',
+    name: 'vueComputed',
+    component: () => import(/* webpackChunkName: "vueComputed" */ '../views/VueComputed.vue')
+  },
 ]
 
 const router = createRouter({
