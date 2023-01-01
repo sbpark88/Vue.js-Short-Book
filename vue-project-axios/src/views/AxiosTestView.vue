@@ -24,7 +24,12 @@ export default {
   name: "AxiosTestView",
   data() {
     return {
-      productList: [],
+      productList: Array["product"],
+      product: {
+        productName: "",
+        price: 0,
+        category: "",
+      },
     };
   },
   created() {
@@ -32,7 +37,7 @@ export default {
   },
   methods: {
     async getList() {
-      this.productList = await this.$api("/test", "get");
+      this.productList = await this.$get("/test");
     },
   },
 };
