@@ -1,5 +1,21 @@
 <template>
-  <div class="about">
-    <h1>This is an about page</h1>
-  </div>
+  <PageTitle :my-title="someTitle" />
 </template>
+
+<script>
+import PageTitle from "@/components/PageTitle.vue";
+
+export default {
+  name: "AboutView",
+  components: {
+    PageTitle,
+  },
+  data() {
+    return {
+      someTitle: "About 페이지입니다.",
+    };
+  },
+};
+</script>
+
+<style scoped></style>

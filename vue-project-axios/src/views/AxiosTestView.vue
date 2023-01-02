@@ -1,4 +1,5 @@
 <template>
+  <PageTitle my-title="Axios 페이지입니다." />
   <div>
     <table>
       <thead>
@@ -21,8 +22,13 @@
 
 <script>
 import product from "@/dto/product";
+import PageTitle from "@/components/PageTitle.vue";
+
 export default {
   name: "AxiosTestView",
+  components: {
+    PageTitle,
+  },
   data() {
     return {
       productList: Array[product],
