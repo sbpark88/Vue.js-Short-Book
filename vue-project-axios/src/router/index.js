@@ -22,6 +22,12 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "axios" */ "../views/AxiosTestView.vue"),
   },
+  {
+    path: "/call-event",
+    name: "call event",
+    component: () =>
+      import(/* webpackChunkName: "callEvent" */ "../views/EventCallView.vue"),
+  },
 ];
 
 const router = createRouter({
