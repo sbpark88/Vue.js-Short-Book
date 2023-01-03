@@ -28,6 +28,18 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "callEvent" */ "../views/EventCallView.vue"),
   },
+  {
+    path: "/slot",
+    name: "slot",
+    component: () =>
+      import(/* webpackChunkName: "slot" */ "../views/SlotModalLayoutView.vue"),
+  },
+  {
+    path: "/another-slot",
+    name: "slot2",
+    component: () =>
+      import(/* webpackChunkName: "slot2" */ "../views/FancyButtonView.vue"),
+  },
 ];
 
 const router = createRouter({

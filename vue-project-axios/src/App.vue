@@ -3,7 +3,9 @@
     <router-link to="/">Home</router-link> |
     <router-link to="/about">About</router-link> |
     <router-link to="/axios">Axios</router-link> |
-    <router-link to="/call-event">Event</router-link>
+    <router-link to="/call-event">Event</router-link> |
+    <router-link to="/slot">Slot</router-link> |
+    <router-link to="/another-slot">Slot 2</router-link>
   </nav>
   <router-view />
 </template>
