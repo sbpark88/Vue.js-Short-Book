@@ -14,6 +14,21 @@ const routes = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
+  },
+  {
+    path: '/calculator-with-options-api',
+    name: 'calculatorOptionsAPI',
+    component: () => import(/* webpackChunkName: "calculatorOptionsAPI" */ '../views/CalculatorOptionsAPI.vue')
+  },
+  {
+    path: '/calculator-with-composition-api',
+    name: 'calculatorCompositionAPI',
+    component: () => import(/* webpackChunkName: "calculatorCompositionAPI" */ '../views/CalculatorCompositionAPI.vue')
+  },
+  {
+    path: '/calculator-with-composition-api-and-external-files',
+    name: 'calculatorWithExternalFiles',
+    component: () => import(/* webpackChunkName: "calculatorWithExternal" */ '../views/CalculatorWithExternalFiles.vue')
   }
 ]
 
