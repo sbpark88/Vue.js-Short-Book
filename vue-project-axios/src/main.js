@@ -4,4 +4,9 @@ import router from "./router";
 import store from "./store";
 import mixins from "@/mixins";
 
-createApp(App).use(store).use(router).mixin(mixins).mount("#app");
+createApp(App)
+  .use(store)
+  .use(router)
+  .mixin(mixins)
+  .provide("appLevelValue", "Hello~ This is App")
+  .mount("#app");

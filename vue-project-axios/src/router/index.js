@@ -40,6 +40,12 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "slot2" */ "../views/FancyButtonView.vue"),
   },
+  {
+    path: "/provide-inject",
+    name: "provide inject",
+    component: () =>
+      import(/* webpackChunkName: "root" */ "../views/RootView.vue"),
+  },
 ];
 
 const router = createRouter({

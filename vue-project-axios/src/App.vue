@@ -5,7 +5,8 @@
     <router-link to="/axios">Axios</router-link> |
     <router-link to="/call-event">Event</router-link> |
     <router-link to="/slot">Slot</router-link> |
-    <router-link to="/another-slot">Slot 2</router-link>
+    <router-link to="/another-slot">Slot 2</router-link> |
+    <router-link to="/provide-inject">Provide/Inject</router-link>
   </nav>
   <router-view />
 </template>
