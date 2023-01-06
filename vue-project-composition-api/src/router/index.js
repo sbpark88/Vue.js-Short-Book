@@ -29,6 +29,11 @@ const routes = [
     path: '/calculator-with-composition-api-and-external-files',
     name: 'calculatorWithExternalFiles',
     component: () => import(/* webpackChunkName: "calculatorWithExternal" */ '../views/CalculatorWithExternalFiles.vue')
+  },
+  {
+    path: '/provide-inject-with-composition-api',
+    name: 'provideInject',
+    component: () => import(/* webpackChunkName: "provideInject" */ '../views/RootView.vue')
   }
 ]
 
