@@ -39,6 +39,7 @@ export default {
   },
   methods: {
     async getList() {
+      // this.productList = (await this.$api.get("/test")).data;  // If you want to custom configs
       this.productList = await this.$get("/test");
     },
   },

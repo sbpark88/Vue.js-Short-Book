@@ -3,7 +3,7 @@ import axios from "axios";
 export default {
   created: function () {
     this.$api = axios.create({
-      baseURL: "https://0000.mock.pstmn.io",
+      baseURL: "https://01686eb5-dc36-437b-8b1b-870e3176d0b4.mock.pstmn.io",
     });
   },
   methods: {

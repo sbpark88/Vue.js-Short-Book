@@ -5,7 +5,8 @@
     <router-link to="/calculator-with-options-api">Calculator(Options API)</router-link> |
     <router-link to="/calculator-with-composition-api">Calculator(Composition API)</router-link> |
     <router-link to="/calculator-with-composition-api-and-external-files">Calculator(External Files)</router-link> |
-    <router-link to="/provide-inject-with-composition-api">Provide/Inject(Composition API)</router-link>
+    <router-link to="/provide-inject-with-composition-api">Provide/Inject(Composition API)</router-link> |
+    <router-link to="/axios-mixins-with-composition-api">Axios/mixins(Composition API)</router-link>
   </nav>
   <router-view/>
 </template>

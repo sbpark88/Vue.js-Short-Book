@@ -34,6 +34,11 @@ const routes = [
     path: '/provide-inject-with-composition-api',
     name: 'provideInject',
     component: () => import(/* webpackChunkName: "provideInject" */ '../views/RootView.vue')
+  },
+  {
+    path: '/axios-mixins-with-composition-api',
+    name: 'mixinsCompositionAPI',
+    component: () => import(/* webpackChunkName: "mixins" */ '../views/AxiosWithCompositionAPI.vue')
   }
 ]
 
