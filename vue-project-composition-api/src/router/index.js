@@ -1,19 +1,10 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
 
 const routes = [
   {
     path: '/',
     name: 'home',
-    component: HomeView
-  },
-  {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
+    beforeEnter: (to, from, next) => { window.location.href = '/calculator-with-options-api' }
   },
   {
     path: '/calculator-with-options-api',
@@ -44,6 +35,11 @@ const routes = [
     path: '/custom-directives',
     name: 'customDirectives',
     component: () => import(/* webpackChunkName: "customDirectives */ '../views/CustomDirectives.vue')
+  },
+  {
+    path: '/custom-plugins',
+    name: 'customPlugins',
+    component: () => import(/* webpackChunkName: "customPlugins" */ '../views/CustomPlugins.vue')
   }
 ]
 
