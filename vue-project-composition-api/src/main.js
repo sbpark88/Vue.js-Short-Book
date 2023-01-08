@@ -3,8 +3,13 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 
-createApp(App)
+const myApp = createApp(App)
   .use(store)
   .use(router)
   .provide('appLevelValue', 'Hello~ This is App')
-  .mount('#app')
+
+myApp.directive('focus', (el, binding) => {
+  el.focus()
+})
+
+myApp.mount('#app')

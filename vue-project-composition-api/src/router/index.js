@@ -39,6 +39,11 @@ const routes = [
     path: '/axios-mixins-with-composition-api',
     name: 'mixinsCompositionAPI',
     component: () => import(/* webpackChunkName: "mixins" */ '../views/AxiosWithCompositionAPI.vue')
+  },
+  {
+    path: '/custom-directives',
+    name: 'customDirectives',
+    component: () => import(/* webpackChunkName: "customDirectives */ '../views/CustomDirectives.vue')
   }
 ]
 
