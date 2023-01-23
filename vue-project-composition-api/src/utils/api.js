@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const $api = axios.create({
-  baseURL: 'https://0000.mock.pstmn.io'
+  // baseURL: 'http://localhost:8080' // Can be omitted as this is the default
 })
 
 const $get = async (url, data) => {

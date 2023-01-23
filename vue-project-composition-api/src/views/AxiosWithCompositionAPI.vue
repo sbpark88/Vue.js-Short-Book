@@ -32,7 +32,7 @@ export default {
     })
 
     const getList = async () => {
-      state.productList = await $get('/test')
+      state.productList = await $get('/api/getProducts')
     }
 
     onMounted(() => {
