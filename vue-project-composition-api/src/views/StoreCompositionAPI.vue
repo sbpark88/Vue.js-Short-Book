@@ -5,15 +5,21 @@
 
 <script>
 import { useStore } from 'vuex'
-import { computed } from 'vue'
+import { computed, reactive, toRefs } from 'vue'
+
+const storeCounter = (store) => {
+  const state = reactive({
+    count: computed(() => store.state.count),
+    increment: () => store.commit('increment')
+  })
+  return toRefs(state)
+}
 export default {
   name: 'StoreCompositionAPI',
   setup () {
     const store = useStore()
-    return {
-      count: computed(() => store.state.count),
-      increment: () => store.commit('increment')
-    }
+    const { count, increment } = storeCounter(store)
+    return { count, increment }
   }
 }
 </script>
