@@ -18,5 +18,11 @@ export default createStore({
     calledEvenTimes (state) {
       return state.count % 2 === 0
     }
+  },
+  actions: {
+    incrementInActions (context) {
+      console.log('\'increment\' will be called by actions.')
+      context.commit('increment')
+    }
   }
 })
