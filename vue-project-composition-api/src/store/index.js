@@ -20,9 +20,9 @@ export default createStore({
     }
   },
   actions: {
-    incrementInActions (context) {
+    incrementInActions ({ commit }) {
       console.log('\'increment\' will be called by actions.')
-      context.commit('increment')
+      commit('increment')
     }
   }
 })
