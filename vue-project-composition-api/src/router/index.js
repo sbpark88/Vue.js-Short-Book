@@ -40,6 +40,16 @@ const routes = [
     path: '/custom-plugins',
     name: 'customPlugins',
     component: () => import(/* webpackChunkName: "customPlugins" */ '../views/CustomPlugins.vue')
+  },
+  {
+    path: '/store-access',
+    name: 'storeAccess',
+    component: () => import(/* webpackChunkName: "vuex" */ '../views/StoreAccess.vue')
+  },
+  {
+    path: '/store-access2',
+    name: 'storeAccess2',
+    component: () => import(/* webpackChunkName: "vuex2" */ '../views/AnotherStoreAccess.vue')
   }
 ]
 
