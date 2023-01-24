@@ -13,5 +13,10 @@ export default createStore({
     // increment () {
     //   this.state.count++
     // }
+  },
+  getters: {
+    calledEvenTimes (state) {
+      return state.count % 2 === 0
+    }
   }
 })
