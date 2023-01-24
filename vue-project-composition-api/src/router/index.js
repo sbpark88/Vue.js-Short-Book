@@ -44,12 +44,12 @@ const routes = [
   {
     path: '/store-access',
     name: 'storeAccess',
-    component: () => import(/* webpackChunkName: "vuex" */ '../views/StoreAccess.vue')
+    component: () => import(/* webpackChunkName: "vuex" */ '../views/StoreOptionsAPI.vue')
   },
   {
     path: '/store-access2',
     name: 'storeAccess2',
-    component: () => import(/* webpackChunkName: "vuex2" */ '../views/AnotherStoreAccess.vue')
+    component: () => import(/* webpackChunkName: "vuex2" */ '../views/StoreCompositionAPI.vue')
   }
 ]
 

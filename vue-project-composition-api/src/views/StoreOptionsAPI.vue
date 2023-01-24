@@ -5,7 +5,7 @@
 
 <script>
 export default {
-  name: 'StoreAccess',
+  name: 'StoreOptionsAPI',
   computed: {
     count () {
       return this.$store.state.count
