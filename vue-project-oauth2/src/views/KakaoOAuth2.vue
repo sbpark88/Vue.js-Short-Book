@@ -8,9 +8,6 @@
       />
     </a>
     <p id="token-result"></p>
-    <p>
-      <button type="button" @click="kakaoLogout">카카오 로그아웃</button>
-    </p>
   </div>
 </template>
 
@@ -24,19 +21,8 @@ export default {
         scope: "profile_image, account_email",
       });
     };
-    const kakaoLogout = () => {
-      window.Kakao.Auth.logout()
-        .then((res) => {
-          console.debug(res);
-          console.log(window.Kakao.Auth.getAccessToken());
-        })
-        .catch((err) => {
-          console.log(err);
-          alert("Not logged in.");
-        });
-    };
 
-    return { kakaoLogin, kakaoLogout };
+    return { kakaoLogin };
   },
 };
 </script>

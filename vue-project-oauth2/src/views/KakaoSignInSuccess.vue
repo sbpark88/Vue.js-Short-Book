@@ -5,7 +5,10 @@
   <button type="button" @click="requestUserInfo">사용자 정보 가져오기</button>
   <button type="button" @click="signOut">로그아웃</button>
   <p id="token-result">Access Token: {{ oAuth.access_token }}</p>
-  <p>Kakao Nickname : {{ kakao.profile.nickname }}</p>
+  <p>
+    Kakao Porfile :
+    <img :src="kakao.profile.profile_image_url" alt="카카오 프로필 사진" />
+  </p>
   <p>e-mail : {{ kakao.email }}</p>
 </template>
 
@@ -59,8 +62,7 @@ export default {
 
       if (token) {
         Object.assign(oAuth, token);
-        console.log(token);
-        console.log(oAuth);
+        window.Kakao.Auth.setAccessToken(oAuth.access_token);
       } else {
         alert("인증 실패! 처음부터 다시 시도하십시오.");
         // location.href = "/kakao";
@@ -68,8 +70,42 @@ export default {
       }
     };
 
-    const requestUserInfo = () => {};
-    const signOut = () => {};
+    const requestUserInfo = () => {
+      if (oAuth.access_token) {
+        window.Kakao.API.request({
+          url: "/v2/user/me",
+          data: {
+            property_keys: ["kakao_account.profile", "kakao_account.email"],
+          },
+        })
+          .then((res) => {
+            console.log(res);
+            Object.assign(kakao, res.kakao_account);
+            console.log(kakao);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      } else {
+        alert("토큰을 획득하세요.");
+      }
+    };
+    const signOut = async () => {
+      await window.Kakao.Auth.logout()
+        .then((res) => {
+          console.log(res);
+          console.log(window.Kakao.Auth.getAccessToken()); // null
+        })
+        .catch((err) => {
+          console.log(err);
+          alert("Not logged in.");
+        });
+
+      alert("잠시 후 로그인 화면으로 이동합니다.");
+      setTimeout(async () => {
+        await router.push("/kakao");
+      }, 3000);
+    };
 
     return {
       oAuth,
