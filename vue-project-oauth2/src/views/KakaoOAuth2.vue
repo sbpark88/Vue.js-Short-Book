@@ -12,15 +12,12 @@
 </template>
 
 <script>
+import { signIn } from "@/utils/KakaoOAuth";
+
 export default {
   name: "KakaoOAuth2",
   setup() {
-    const kakaoLogin = () => {
-      window.Kakao.Auth.authorize({
-        redirectUri: "http://localhost:8080/logged-in",
-        scope: "profile_image, account_email",
-      });
-    };
+    const kakaoLogin = signIn("http://localhost:8080/logged-in");
 
     return { kakaoLogin };
   },

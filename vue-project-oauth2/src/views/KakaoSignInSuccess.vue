@@ -3,7 +3,7 @@
     토큰 가져오기
   </button>
   <button type="button" @click="requestUserInfo">사용자 정보 가져오기</button>
-  <button type="button" @click="signOut">로그아웃</button>
+  <button type="button" @click="kakaoLogout">로그아웃</button>
   <p id="token-result">Access Token: {{ oAuth.access_token }}</p>
   <p>
     Kakao Porfile :
@@ -14,13 +14,18 @@
 
 <script>
 import { onMounted, reactive } from "vue";
-import { $post } from "@/utils/api";
 import router from "@/router";
+import {
+  extractAuthorizationCode,
+  getOAuthToken,
+  getUserInformation,
+  signOut,
+} from "@/utils/KakaoOAuth";
 
 export default {
   name: "KakaoSignInSuccess",
   setup() {
-    let authorizeCode = "";
+    let authorizationCode = "";
 
     const oAuth = reactive({
       access_token: "",
@@ -37,28 +42,19 @@ export default {
     });
 
     onMounted(() => {
-      getAuthorizeCode();
-      console.log(`authorizeCode: ${authorizeCode}`);
+      getAuthorizationCode();
+      console.log(`authorizationCode: ${authorizationCode}`);
     });
 
-    const getAuthorizeCode = () => {
-      authorizeCode = window.location.search.split("=")[1];
+    const getAuthorizationCode = () => {
+      authorizationCode = extractAuthorizationCode();
     };
 
-    // redirect_uri: encodeURIComponent("http://localhost:8080/logged-in"), // Do not encode REDIRECT_URI
     const getToken = async () => {
-      const token = await $post(
-        "https://kauth.kakao.com/oauth/token",
-        new URLSearchParams({
-          grant_type: "authorization_code",
-          client_id: "", // Kakao_REST_API_KEY
-          redirect_uri: "http://localhost:8080/logged-in", // REDIRECT_URI
-          code: authorizeCode, // AUTHORIZE_CODE
-        }),
-        {
-          headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        }
-      );
+      const token = await getOAuthToken(
+        "http://localhost:8080/logged-in",
+        authorizationCode
+      )();
 
       if (token) {
         Object.assign(oAuth, token);
@@ -72,12 +68,7 @@ export default {
 
     const requestUserInfo = () => {
       if (oAuth.access_token) {
-        window.Kakao.API.request({
-          url: "/v2/user/me",
-          data: {
-            property_keys: ["kakao_account.profile", "kakao_account.email"],
-          },
-        })
+        getUserInformation()()
           .then((res) => {
             console.log(res);
             Object.assign(kakao, res.kakao_account);
@@ -90,16 +81,8 @@ export default {
         alert("토큰을 획득하세요.");
       }
     };
-    const signOut = async () => {
-      await window.Kakao.Auth.logout()
-        .then((res) => {
-          console.log(res);
-          console.log(window.Kakao.Auth.getAccessToken()); // null
-        })
-        .catch((err) => {
-          console.log(err);
-          alert("Not logged in.");
-        });
+    const kakaoLogout = async () => {
+      await signOut();
 
       alert("잠시 후 로그인 화면으로 이동합니다.");
       setTimeout(async () => {
@@ -112,7 +95,7 @@ export default {
       kakao,
       getToken,
       requestUserInfo,
-      signOut,
+      kakaoLogout,
     };
   },
 };
