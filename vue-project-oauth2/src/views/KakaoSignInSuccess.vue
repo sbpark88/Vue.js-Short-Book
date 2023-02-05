@@ -3,6 +3,7 @@
     토큰 가져오기
   </button>
   <button type="button" @click="requestUserInfo">사용자 정보 가져오기</button>
+  <button type="button" @click="refreshAccessToken">Access Token 갱신</button>
   <button type="button" @click="kakaoLogout">로그아웃</button>
   <p id="token-result">Access Token: {{ oAuth.access_token }}</p>
   <p>
@@ -20,6 +21,7 @@ import {
   extractAuthorizationCode,
   getOAuthToken,
   getUserInformation,
+  updateOAuthToken,
   signOut,
 } from "@/api/auth/kakao";
 import OAuthServer from "@/models/enums/OAuthServer";
@@ -63,12 +65,37 @@ export default {
       )();
 
       if (currentServer.value === OAuthServer.KAKAO && token) {
-        // Object.assign(oAuth, token);
         store.commit("setToken", token);
         window.Kakao.Auth.setAccessToken(oAuth.value.access_token);
       } else {
         alert("인증 실패! 처음부터 다시 시도하십시오.");
         // location.href = "/kakao";
+        await router.push("/kakao");
+      }
+    };
+
+    const refreshAccessToken = async () => {
+      console.log(store.getters["getRefreshToken"]);
+      const token = await updateOAuthToken()(store.getters["getRefreshToken"]);
+      if (currentServer.value === OAuthServer.KAKAO && token) {
+        const accessTokenChanged =
+          !!token.access_token &&
+          oAuth.value.access_token !== token.access_token;
+        const refreshTokenChanged =
+          !!token.refresh_token &&
+          oAuth.value.refresh_token !== token.refresh_token;
+        console.log(
+          `Access Token 이 ${
+            accessTokenChanged ? "갱신되었습니다." : "갱신되지 않았습니다."
+          }  Refresh Token 이 ${
+            refreshTokenChanged ? "갱신되었습니다." : "갱신되지 않았습니다."
+          }
+          `
+        );
+        store.commit("setToken", token);
+        window.Kakao.Auth.setAccessToken(oAuth.value.access_token);
+      } else {
+        alert("인증 실패! 처음부터 다시 시도하십시오.");
         await router.push("/kakao");
       }
     };
@@ -105,6 +132,7 @@ export default {
       oAuth,
       kakao,
       getToken,
+      refreshAccessToken,
       requestUserInfo,
       kakaoLogout,
     };

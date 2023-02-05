@@ -1,5 +1,12 @@
 import { $post } from "@/utils/api";
 
+const JAVASCRIPT_KEY = "";
+const REST_API_KEY = "";
+const URL = Object.freeze({
+  TOKEN: "https://kauth.kakao.com/oauth/token",
+  USER_INFO: "/v2/user/me",
+});
+
 const signIn = (redirectUri) => {
   return () => {
     window.Kakao.Auth.authorize({
@@ -27,12 +34,28 @@ const getOAuthToken = (redirectUri, authorizationCode) => {
   return async () => {
     // redirect_uri: encodeURIComponent("http://localhost:8080/logged-in"), // Do not encode REDIRECT_URI
     return $post(
-      "https://kauth.kakao.com/oauth/token",
+      URL.TOKEN,
       new URLSearchParams({
         grant_type: "authorization_code",
-        client_id: "", // Kakao_REST_API_KEY
+        client_id: REST_API_KEY, // Kakao_REST_API_KEY
         redirect_uri: redirectUri, // REDIRECT_URI
         code: authorizationCode, // AUTHORIZE_CODE
+      }),
+      {
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      }
+    );
+  };
+};
+
+const updateOAuthToken = () => {
+  return async (refreshToken) => {
+    return $post(
+      URL.TOKEN,
+      new URLSearchParams({
+        grant_type: "refresh_token",
+        client_id: REST_API_KEY,
+        refresh_token: refreshToken,
       }),
       {
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
@@ -48,16 +71,18 @@ const getUserInformation = (...properties) => {
   }
   return () => {
     return window.Kakao.API.request({
-      url: "/v2/user/me",
+      url: URL.USER_INFO,
       data: data,
     });
   };
 };
 
 export {
+  JAVASCRIPT_KEY,
   signIn,
   signOut,
   extractAuthorizationCode,
   getOAuthToken,
+  updateOAuthToken,
   getUserInformation,
 };
