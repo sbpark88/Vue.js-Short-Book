@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import { signIn } from "@/utils/KakaoOAuth";
+import { signIn } from "@/api/auth/kakao";
 
 export default {
   name: "KakaoOAuth2",

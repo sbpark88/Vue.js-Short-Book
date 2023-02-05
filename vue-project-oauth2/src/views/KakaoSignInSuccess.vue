@@ -13,41 +13,47 @@
 </template>
 
 <script>
-import { onMounted, reactive } from "vue";
+import { onMounted, reactive, computed, toRefs } from "vue";
 import router from "@/router";
+import { useStore } from "vuex";
 import {
   extractAuthorizationCode,
   getOAuthToken,
   getUserInformation,
   signOut,
-} from "@/utils/KakaoOAuth";
+} from "@/api/auth/kakao";
+import OAuthServer from "@/models/enums/OAuthServer";
 
+const init = () => {
+  const state = reactive({
+    kakao: {
+      profile: "",
+      email: "",
+    },
+  });
+  return toRefs(state);
+};
 export default {
   name: "KakaoSignInSuccess",
   setup() {
     let authorizationCode = "";
+    const { kakao } = init();
 
-    const oAuth = reactive({
-      access_token: "",
-      token_type: "",
-      refresh_token: "",
-      expires_in: 0,
-      scope: "",
-      refresh_token_expires_in: 0,
-    });
-
-    const kakao = reactive({
-      profile: "",
-      email: "",
-    });
+    const store = useStore();
+    const currentServer = computed(() => store.getters["getCurrentServer"]);
+    const oAuth = computed(() => store.state.kakaoOAuth.oAuth);
 
     onMounted(() => {
       getAuthorizationCode();
       console.log(`authorizationCode: ${authorizationCode}`);
+      console.log(store.state.currentServer);
     });
 
     const getAuthorizationCode = () => {
       authorizationCode = extractAuthorizationCode();
+      if (authorizationCode) {
+        store.commit("setCurrentServer", OAuthServer.KAKAO);
+      }
     };
 
     const getToken = async () => {
@@ -56,9 +62,10 @@ export default {
         authorizationCode
       )();
 
-      if (token) {
-        Object.assign(oAuth, token);
-        window.Kakao.Auth.setAccessToken(oAuth.access_token);
+      if (currentServer.value === OAuthServer.KAKAO && token) {
+        // Object.assign(oAuth, token);
+        store.commit("setToken", token);
+        window.Kakao.Auth.setAccessToken(oAuth.value.access_token);
       } else {
         alert("인증 실패! 처음부터 다시 시도하십시오.");
         // location.href = "/kakao";
@@ -67,12 +74,15 @@ export default {
     };
 
     const requestUserInfo = () => {
-      if (oAuth.access_token) {
+      if (
+        currentServer.value === OAuthServer.KAKAO &&
+        oAuth.value.access_token
+      ) {
         getUserInformation()()
           .then((res) => {
             console.log(res);
-            Object.assign(kakao, res.kakao_account);
-            console.log(kakao);
+            Object.assign(kakao.value, res.kakao_account);
+            console.log(kakao.value);
           })
           .catch((err) => {
             console.log(err);
@@ -83,6 +93,7 @@ export default {
     };
     const kakaoLogout = async () => {
       await signOut();
+      store.commit("resetToken");
 
       alert("잠시 후 로그인 화면으로 이동합니다.");
       setTimeout(async () => {
