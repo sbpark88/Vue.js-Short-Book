@@ -45,14 +45,13 @@ export default {
     }
   },
   watch: {
-    firstName() {
-      const oldValue = this.firstName
-      console.log(oldValue)
-      this.firstName = `${oldValue.substring(0, 1).toUpperCase()}${oldValue.substring(1)}`
+    firstName(newValue, oldValue) {
+      console.log(`firstName(old) : ${oldValue}`)
+      this.firstName = `${newValue.substring(0, 1).toUpperCase()}${newValue.substring(1)}`
     },
-    lastName() {
-      const oldValue = this.lastName
-      this.lastName = `${oldValue.substring(0, 1).toUpperCase()}${oldValue.substring(1)}`
+    lastName(newValue, oldValue) {
+      console.log(`lastName(old) : ${oldValue}`)
+      this.lastName = `${newValue.substring(0, 1).toUpperCase()}${newValue.substring(1)}`
     },
   }
 }
